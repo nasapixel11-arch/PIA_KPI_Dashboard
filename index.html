@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#12304a">
+<meta name="description" content="Retail Expert KPI tracker for daily sales, targets, offdays and weighted performance.">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<title>Retail Expert KPI</title>
+<style>
+:root{--navy:#12304a;--blue:#2778e5;--yellow:#f5c451;--ink:#142334;--muted:#64748b;--bg:#f3f6fa;--line:#e0e7ef;--green:#15966b;--orange:#f0a22e;--card:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink)}button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:12px 15px;font-weight:750}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #9dc5ff;outline-offset:2px}
+.app{max-width:1050px;margin:auto;padding:18px 14px 40px}.hero{background:linear-gradient(130deg,#102a43,#194a70);color:white;padding:23px;border-radius:24px;box-shadow:0 12px 28px #183b5918}.top{display:flex;align-items:center;gap:13px}.logo{background:var(--yellow);color:var(--navy);width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:26px}.eyebrow{font-size:11px;letter-spacing:1.5px;font-weight:850;color:#c9d8e8}.hero h1{font-size:clamp(23px,4vw,32px);margin:3px 0}.sub{color:#d3e1ef;font-size:13px}.hero-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}.hero-stat{background:#ffffff12;border:1px solid #ffffff1b;padding:13px;border-radius:15px}.hero-stat small{color:#d5e4f2;display:block;font-size:12px}.hero-stat strong{display:block;font-size:25px;margin-top:4px}.section-title{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:25px 2px 12px}.section-title h2{margin:0;font-size:19px}.section-title p{margin:4px 0 0;color:var(--muted);font-size:12px}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.card,.panel{background:var(--card);border:1px solid var(--line);border-radius:19px;padding:17px;box-shadow:0 3px 12px #17355006}.kpi-head{display:flex;align-items:center;gap:10px}.kpi-icon{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;font-size:21px}.kpi-head h3{font-size:14px;margin:0}.weight{font-size:11px;color:var(--muted);margin-top:3px}.pct{margin-left:auto;font-weight:850;font-size:17px}.numbers{display:flex;align-items:baseline;gap:5px;margin:17px 0 10px}.numbers strong{font-size:29px;letter-spacing:-1px}.numbers span{color:var(--muted);font-size:12px}.bar{height:8px;background:#edf1f6;border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;border-radius:99px}.mini-row{display:flex;justify-content:space-between;gap:8px;font-size:12px;margin-top:11px}.mini-row span{color:var(--muted)}.mini-row strong{font-size:12px}.two{display:grid;grid-template-columns:1fr 1fr;gap:13px}.panel h2{font-size:17px;margin:0 0 5px}.panel .hint{color:var(--muted);font-size:12px;margin:0 0 16px;line-height:1.45}.field{display:flex;flex-direction:column;gap:6px;margin-bottom:13px}.field label{font-size:12px;font-weight:800}.field input,.field select{width:100%;border:1px solid #d5deea;background:#fff;color:var(--ink);border-radius:11px;padding:12px}.status-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}.status-option{border:1px solid var(--line);border-radius:12px;padding:11px;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700}.status-option input{accent-color:var(--blue)}.primary{background:var(--blue);color:white;width:100%}.secondary{background:#e9f1fc;color:#174b85}.danger{background:#fff0ed;color:#a33c2b}.date-banner{background:#edf5ff;border:1px solid #d5e6ff;border-radius:13px;padding:12px;margin-bottom:15px;display:flex;align-items:center;justify-content:space-between;gap:10px}.date-banner strong{font-size:17px}.date-banner span{font-size:11px;color:#365a7e}.message{margin-top:11px;font-size:12px;line-height:1.5;color:#155e47}.message.error{color:#a33c2b}.off-note{padding:13px;border-radius:12px;background:#fff8e5;color:#755314;font-size:13px;line-height:1.45;margin-bottom:14px}.history{margin-top:10px}.history-row{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}.history-row:last-child{border-bottom:0}.history-row strong{font-size:13px}.history-row small{display:block;color:var(--muted);font-size:11px;margin-top:3px}.tag{font-size:10px;font-weight:850;border-radius:99px;padding:6px 9px;background:#e6f7ef;color:#13734f;white-space:nowrap}.tag.off{background:#fff1d2;color:#805b11}.edit{padding:8px 10px;font-size:11px;background:#edf3fb;color:#254e79}.history-empty{font-size:13px;color:var(--muted);padding:15px 0}.foot{font-size:11px;color:var(--muted);line-height:1.5;margin:18px 2px}.hide{display:none!important}.score-line{display:flex;justify-content:space-between;gap:10px;font-size:12px;margin-top:10px;color:#d3e1ef}
+@media(max-width:720px){.cards{grid-template-columns:1fr}.two{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr 1fr}.hero-grid .hero-stat:last-child{grid-column:span 2}.app{padding:12px 11px 30px}.hero{padding:18px}.card{padding:15px}.section-title{margin-top:22px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+ <div class="top"><div class="logo">📊</div><div><div class="eyebrow">OCTOBER 2026 · SALES PERFORMANCE</div><h1>Retail Expert KPI</h1><div class="sub">Your daily sales command centre</div></div></div>
+ <div class="hero-grid">
+  <div class="hero-stat"><small>Weighted KPI score</small><strong id="score">50.25%</strong></div>
+  <div class="hero-stat"><small>Working days left</small><strong id="daysLeft">9</strong></div>
+  <div class="hero-stat"><small>Next pending date</small><strong id="nextDate" style="font-size:21px">16 Oct</strong></div>
+ </div>
+ <div class="score-line"><span>Overall weighted achievement</span><strong id="scoreCaption">50.25% of weighted KPI</strong></div>
+ <div class="bar" style="margin-top:8px;background:#ffffff25"><span id="scoreBar" style="width:50.25%;background:var(--yellow)"></span></div>
+</header>
+
+<div class="section-title"><div><h2>KPI performance</h2><p>Cumulative totals, target balance and daily pace</p></div></div>
+<section class="cards" id="kpiCards"></section>
+
+<div class="section-title"><div><h2>Daily entry</h2><p>Dates stay in sequence. Offdays never count as sales or workdays.</p></div></div>
+<div class="two">
+ <section class="panel">
+  <h2 id="entryHeading">Log sales · 16 October</h2>
+  <p class="hint">Complete the date shown before moving to the next date. Enter 0 when you worked but made no sales.</p>
+  <div class="date-banner"><div><span>DATE TO RECORD</span><br><strong id="entryDate">16 Oct 2026</strong></div><span id="dateState">Awaiting entry</span></div>
+  <div class="field"><label>Day status</label></div>
+  <div class="status-options">
+   <label class="status-option"><input type="radio" name="dayStatus" value="Working Day" checked> Working day</label>
+   <label class="status-option"><input type="radio" name="dayStatus" value="Offday"> Offday</label>
+  </div>
+  <div id="salesFields">
+   <div class="field"><label for="prepaid">🟦 Prepaid GA</label><input id="prepaid" type="number" min="0" step="1" placeholder="Enter daily total"></div>
+   <div class="field"><label for="hv">🟧 HV Tourist 14 Days GA</label><input id="hv" type="number" min="0" step="1" placeholder="Enter daily total"></div>
+   <div class="field"><label for="postpaid">🟩 Postpaid</label><input id="postpaid" type="number" min="0" step="1" placeholder="Enter daily total"></div>
+  </div>
+  <div id="offNote" class="off-note hide">☕ Offday selected. No sales figures will be added, and working days remaining will not decrease.</div>
+  <button class="primary" id="saveBtn">Confirm day & save</button>
+  <div id="formMessage" class="message" role="status"></div>
+ </section>
+ <section class="panel">
+  <h2>Smart focus</h2><p class="hint">A quick look at what needs attention next.</p>
+  <div id="focusContent"></div>
+  <div style="height:1px;background:var(--line);margin:17px 0"></div>
+  <h2>Daily rules</h2>
+  <p class="hint" style="margin-bottom:8px">• Each date is recorded once, in order.<br>• Offday = blank sales and no workday deducted.<br>• Working day with no sales = enter 0 in all fields.<br>• HV sales are already included in Prepaid GA. Never add them twice.</p>
+  <button class="secondary" id="exportBtn" style="width:100%">Export records (CSV)</button>
+  <div style="height:9px"></div><button class="secondary" id="backupBtn" style="width:100%">Download backup (JSON)</button>
+  <div style="height:9px"></div><label class="secondary" style="display:block;text-align:center;padding:12px;border-radius:12px;font-size:13px;font-weight:750;cursor:pointer">Restore backup (JSON)<input type="file" id="restoreFile" accept=".json,application/json" style="display:none"></label>
+ </section>
+</div>
+
+<div class="section-title"><div><h2>Daily history</h2><p>Tap Edit to correct a saved date; totals recalculate automatically.</p></div><button class="secondary" id="resetBtn" style="font-size:11px;padding:9px 11px">Reset app</button></div>
+<section class="panel"><div class="history" id="history"></div></section>
+<div class="foot">Data is saved in this browser on this device using local storage. Export a backup regularly before clearing browser data or changing devices. KPI targets: Prepaid 1,100 (40%), HV Tourist 330 (50%), Postpaid 25 (10%).</div>
+</div>
+<script>
+const KEY='retail-expert-kpi-oct-2026-v1';
+const initialRecords=[
+ {date:'2026-10-01',status:'Working Day',prepaid:35,hv:8,postpaid:1},
+ {date:'2026-10-02',status:'Working Day',prepaid:72,hv:6,postpaid:1},
+ {date:'2026-10-03',status:'Working Day',prepaid:109,hv:27,postpaid:5},
+ {date:'2026-10-04',status:'Offday'},
+ {date:'2026-10-05',status:'Working Day',prepaid:57,hv:12,postpaid:5},
+ {date:'2026-10-06',status:'Working Day',prepaid:33,hv:8,postpaid:0},
+ {date:'2026-10-07',status:'Working Day',prepaid:42,hv:4,postpaid:0},
+ {date:'2026-10-08',status:'Working Day',prepaid:38,hv:13,postpaid:1},
+ {date:'2026-10-09',status:'Offday'},
+ {date:'2026-10-10',status:'Offday'},
+ {date:'2026-10-11',status:'Working Day',prepaid:47,hv:7,postpaid:0},
+ {date:'2026-10-12',status:'Working Day',prepaid:73,hv:15,postpaid:2},
+ {date:'2026-10-13',status:'Offday'},
+ {date:'2026-10-14',status:'Working Day',prepaid:61,hv:30,postpaid:0},
+ {date:'2026-10-15',status:'Working Day',prepaid:43,hv:13,postpaid:1}
+];
+const targets={prepaid:1100,hv:330,postpaid:25};
+const weights={prepaid:.4,hv:.5,postpaid:.1};
+let records=[],editingDate=null;
+const $=id=>document.getElementById(id);
+const fmt=n=>Number(n).toLocaleString('en-MY');
+const parseDate=s=>new Date(s+'T12:00:00');
+const pretty=s=>parseDate(s).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+const shortDate=s=>parseDate(s).toLocaleDateString('en-GB',{day:'2-digit',month:'short'});
+function load(){try{const d=JSON.parse(localStorage.getItem(KEY));records=Array.isArray(d?.records)?d.records:initialRecords.map(x=>({...x}));}catch(e){records=initialRecords.map(x=>({...x}));}records.sort((a,b)=>a.date.localeCompare(b.date));}
+function persist(){localStorage.setItem(KEY,JSON.stringify({records}));}
+function totals(){return records.reduce((a,r)=>{if(r.status==='Working Day'){a.prepaid+=+r.prepaid||0;a.hv+=+r.hv||0;a.postpaid+=+r.postpaid||0;a.workdays++;}else a.offdays++;return a;},{prepaid:0,hv:0,postpaid:0,workdays:0,offdays:0});}
+function nextPending(){let d=new Date('2026-10-01T12:00:00');for(let i=0;i<31;i++){let s=d.toISOString().slice(0,10);if(!records.some(r=>r.date===s))return s;d.setDate(d.getDate()+1);}return '2026-11-01';}
+function daysLeft(){return Math.max(0,9-records.filter(r=>r.status==='Working Day'&&r.date>'2026-10-15').length);}
+function weighted(t){return (Math.min(t.prepaid/targets.prepaid,1.5)*40)+(Math.min(t.hv/targets.hv,1.5)*50)+(Math.min(t.postpaid/targets.postpaid,1.5)*10);}
+function render(){
+ const t=totals(),score=weighted(t),pending=nextPending(),left=daysLeft();
+ $('score').textContent=score.toFixed(2)+'%';$('scoreCaption').textContent=score.toFixed(2)+'% weighted achievement';$('scoreBar').style.width=Math.min(100,score)+'%';
+ $('daysLeft').textContent=left;$('nextDate').textContent=shortDate(pending);$('entryDate').textContent=pretty(editingDate||pending);
+ $('entryHeading').textContent=(editingDate?'Edit record · ':'Log sales · ')+shortDate(editingDate||pending);
+ $('dateState').textContent=editingDate?'Editing saved date':'Awaiting entry';
+ const cards=[
+  {key:'prepaid',name:'Prepaid GA',emoji:'📱',target:1100,weight:40,color:'#2778e5',bg:'#e6f0ff'},
+  {key:'hv',name:'HV Tourist 14 Days',emoji:'✈️',target:330,weight:50,color:'#eea329',bg:'#fff2d9'},
+  {key:'postpaid',name:'Postpaid',emoji:'👥',target:25,weight:10,color:'#15966b',bg:'#dcf7ec'}
+ ];
+ $('kpiCards').innerHTML=cards.map(k=>{let v=t[k.key],bal=Math.max(0,k.target-v),pct=v/k.target*100;return `<article class="card"><div class="kpi-head"><div class="kpi-icon" style="background:${k.bg}">${k.emoji}</div><div><h3>${k.name}</h3><div class="weight">${k.weight}% KPI weight</div></div><div class="pct">${pct.toFixed(1)}%</div></div><div class="numbers"><strong>${fmt(v)}</strong><span>/ ${fmt(k.target)}</span></div><div class="bar"><span style="width:${Math.min(100,pct)}%;background:${k.color}"></span></div><div class="mini-row"><span>Balance remaining</span><strong>${fmt(bal)}</strong></div><div class="mini-row"><span>Required per workday</span><strong>${left?(bal/left).toFixed(1):'—'}</strong></div></article>`}).join('');
+ const hvP=100*t.hv/330,preP=100*t.prepaid/1100,postP=100*t.postpaid/25;
+ let focus=hvP<=preP&&hvP<=postP?`<div class="off-note">🎯 <b>Priority: HV Tourist</b><br>It carries the highest weight (50%). Current progress is ${hvP.toFixed(1)}%, with ${fmt(Math.max(0,330-t.hv))} still needed.</div>`:`<div class="off-note">🎯 <b>Keep your momentum</b><br>Postpaid is at ${postP.toFixed(1)}%. Keep an eye on HV Tourist too, as it carries 50% of the total weight.</div>`;
+ $('focusContent').innerHTML=focus+`<div class="mini-row"><span>Prepaid progress</span><strong>${preP.toFixed(1)}%</strong></div><div class="mini-row"><span>HV Tourist progress</span><strong>${hvP.toFixed(1)}%</strong></div><div class="mini-row"><span>Postpaid progress</span><strong>${postP.toFixed(1)}%</strong></div><p class="hint" style="margin-top:15px">Recorded working days: ${t.workdays} · Offdays: ${t.offdays}</p>`;
+ renderHistory(pending);
+ const isOff=document.querySelector('input[name="dayStatus"]:checked')?.value==='Offday';
+ $('salesFields').classList.toggle('hide',isOff);$('offNote').classList.toggle('hide',!isOff);
+ $('saveBtn').textContent=editingDate?'Save correction':isOff?'Confirm offday & continue':'Confirm day & save';
+}
+function renderHistory(pending){
+ const list=[...records].sort((a,b)=>b.date.localeCompare(a.date));
+ $('history').innerHTML=list.length?list.map(r=>`<div class="history-row"><div><strong>${pretty(r.date)}</strong><small>${r.status==='Offday'?'Offday — no sales figures':`Prepaid ${r.prepaid} · HV ${r.hv} · Postpaid ${r.postpaid}`}</small></div><span class="tag ${r.status==='Offday'?'off':''}">${r.status==='Offday'?'Offday':'Saved'}</span><button class="edit" data-edit="${r.date}">Edit</button></div>`).join(''):'<div class="history-empty">No records yet.</div>';
+ document.querySelectorAll('[data-edit]').forEach(b=>b.addEventListener('click',()=>editRecord(b.dataset.edit)));
+}
+function editRecord(date){const r=records.find(x=>x.date===date);if(!r)return;editingDate=date;$('prepaid').value=r.status==='Working Day'?r.prepaid:'';$('hv').value=r.status==='Working Day'?r.hv:'';$('postpaid').value=r.status==='Working Day'?r.postpaid:'';document.querySelector(`input[name="dayStatus"][value="${r.status}"]`).checked=true;$('formMessage').textContent='Editing saved record. Save to apply corrections.';$('formMessage').className='message';render();window.scrollTo({top:document.querySelector('.two').offsetTop-10,behavior:'smooth'});}
+document.querySelectorAll('input[name="dayStatus"]').forEach(el=>el.addEventListener('change',render));
+$('saveBtn').addEventListener('click',()=>{
+ const status=document.querySelector('input[name="dayStatus"]:checked').value;
+ const date=editingDate||nextPending();
+ let rec;
+ if(status==='Working Day'){
+  const vals=[$('prepaid').value,$('hv').value,$('postpaid').value];
+  if(vals.some(v=>v.trim()===''||!Number.isFinite(Number(v))||Number(v)<0||!Number.isInteger(Number(v)))){$('formMessage').textContent='Enter a whole number (0 or more) for all three KPIs.';$('formMessage').className='message error';return;}
+  rec={date,status,prepaid:Number(vals[0]),hv:Number(vals[1]),postpaid:Number(vals[2])};
+ }else rec={date,status};
+ const existing=records.findIndex(r=>r.date===date);
+ if(!editingDate&&existing>=0){$('formMessage').textContent='This date already has a record. Use Edit in history.';$('formMessage').className='message error';return;}
+ if(existing>=0)records[existing]=rec;else records.push(rec);
+ records.sort((a,b)=>a.date.localeCompare(b.date));persist();
+ editingDate=null;$('prepaid').value='';$('hv').value='';$('postpaid').value='';
+ document.querySelector('input[name="dayStatus"][value="Working Day"]').checked=true;
+ $('formMessage').textContent=status==='Offday'?`${pretty(date)} saved as Offday. No sales added; working-day balance unchanged.`:`${pretty(date)} saved successfully. Cumulative totals updated.`;
+ $('formMessage').className='message';render();
+});
+$('exportBtn').addEventListener('click',()=>{
+ const rows=[['Date','Status','Prepaid GA','HV Tourist 14 Days GA','Postpaid'],...records.map(r=>[r.date,r.status,r.status==='Working Day'?r.prepaid:'',r.status==='Working Day'?r.hv:'',r.status==='Working Day'?r.postpaid:''])];
+ const csv=rows.map(row=>row.map(v=>`"${String(v??'').replaceAll('"','""')}"`).join(',')).join('\r\n');download('retail-expert-kpi-oct-2026.csv',csv,'text/csv;charset=utf-8');
+});
+$('backupBtn').addEventListener('click',()=>download('retail-expert-kpi-backup.json',JSON.stringify({records},null,2),'application/json'));
+function download(name,data,type){const blob=new Blob([data],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();URL.revokeObjectURL(url);}
+$('restoreFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!Array.isArray(d.records)||d.records.some(r=>!r.date||!r.status))throw new Error();records=d.records;records.sort((a,b)=>a.date.localeCompare(b.date));persist();editingDate=null;render();$('formMessage').textContent='Backup restored successfully.';}catch(err){$('formMessage').textContent='Could not restore that file. Please choose a valid KPI JSON backup.';$('formMessage').className='message error';}e.target.value='';});
+$('resetBtn').addEventListener('click',()=>{if(confirm('Reset all saved records to the original October baseline? Export a backup first if needed.')){records=initialRecords.map(x=>({...x}));editingDate=null;persist();render();$('formMessage').textContent='Original October baseline restored.';}});
+load();render();
+// Register offline service worker when hosted on HTTPS or localhost.
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+}
+</script>
+</body>
+</html>
